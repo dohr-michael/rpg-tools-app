@@ -1,22 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ElectronService } from './providers/electron.service';
+import { MatSidenav } from '@angular/material';
 
-@Component({
+@Component( {
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
+  styleUrls: [ './app.component.scss' ]
+} )
 export class AppComponent {
-  constructor(public electronService: ElectronService) {
+  @ViewChild( 'side' )
+  private side: MatSidenav;
 
-    if (electronService.isElectron()) {
-      console.log('Mode electron');
+  constructor( public electronService: ElectronService ) {
+
+    if( electronService.isElectron() ) {
+      console.log( 'Mode electron' );
       // Check if electron is correctly injected (see externals in webpack.config.js)
-      console.log('c', electronService.ipcRenderer);
+      console.log( 'c', electronService.ipcRenderer );
       // Check if nodeJs childProcess is correctly injected (see externals in webpack.config.js)
-      console.log('c', electronService.childProcess);
+      console.log( 'c', electronService.childProcess );
     } else {
-      console.log('Mode web');
+      console.log( 'Mode web' );
     }
   }
+
+  toggleMenu = () => {
+    if( this.side.opened ) {
+      this.side.close();
+    } else {
+      this.side.open();
+    }
+  }
+
 }

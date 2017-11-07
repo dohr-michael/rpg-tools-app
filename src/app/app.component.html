@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<div class="app">
+  <app-top-bar [toggleMenu]="toggleMenu"></app-top-bar>
+  <mat-sidenav-container class="app__container">
+    <mat-sidenav #side mode="side" color="secondary">
+      <app-side-bar></app-side-bar>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
